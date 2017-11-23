@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "drug_administration")
 public class DrugAdministration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

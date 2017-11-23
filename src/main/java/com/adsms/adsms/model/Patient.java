@@ -1,8 +1,7 @@
 package com.adsms.adsms.model;
 
 import com.adsms.adsms.utility.LocalDateConverter;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -34,5 +33,4 @@ public class Patient {
     @ManyToOne
     @JoinColumn(name = "staff_id")
     private Staff staffId;
-
 }

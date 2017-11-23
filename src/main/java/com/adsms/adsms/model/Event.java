@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,5 +27,7 @@ public class Event {
     @OneToOne
     @JoinColumn(name = "event_prototype_id")
     private EventPrototype eventPrototype;
-
+    @OneToMany(targetEntity = Task.class, mappedBy = "event",
+            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Integer> taskProgress;
 }
