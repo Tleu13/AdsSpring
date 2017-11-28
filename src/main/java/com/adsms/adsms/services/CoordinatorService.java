@@ -13,25 +13,26 @@ import java.util.List;
 @Service
 @Transactional
 public class CoordinatorService {
-    private EntityManager entityManager;
+
     private PatientRepository patientRepository;
     private StaffRepository staffRepository;
     private DiagnosisRepository diagnosisRepository;
     private ResearchRepository researchRepository;
     private EventPrototypeRepository eventPrototypeRepository;
-    private TaskPrototypeRepository taskPrototypeRepository;
+
     private ProtocolRepository protocolRepository;
     private EventRepository eventRepository;
     private TaskRepository taskRepository;
 
-    public CoordinatorService(EntityManager entityManager, PatientRepository patientRepository, StaffRepository staffRepository, DiagnosisRepository diagnosisRepository, ResearchRepository researchRepository, EventPrototypeRepository eventPrototypeRepository, TaskPrototypeRepository taskPrototypeRepository, ProtocolRepository protocolRepository, EventRepository eventRepository, TaskRepository taskRepository) {
-        this.entityManager = entityManager;
+    public CoordinatorService(PatientRepository patientRepository, StaffRepository staffRepository,
+                              DiagnosisRepository diagnosisRepository, ResearchRepository researchRepository,
+                              EventPrototypeRepository eventPrototypeRepository, ProtocolRepository protocolRepository,
+                              EventRepository eventRepository, TaskRepository taskRepository) {
         this.patientRepository = patientRepository;
         this.staffRepository = staffRepository;
         this.diagnosisRepository = diagnosisRepository;
         this.researchRepository = researchRepository;
         this.eventPrototypeRepository = eventPrototypeRepository;
-        this.taskPrototypeRepository = taskPrototypeRepository;
         this.protocolRepository = protocolRepository;
         this.eventRepository = eventRepository;
         this.taskRepository = taskRepository;
@@ -43,8 +44,8 @@ public class CoordinatorService {
         return adverseEvents;
     }
 
-    public Staff createStaff(Staff staff) {
-        return staffRepository.save(staff);
+    public void createStaff(Staff staff) {
+        staffRepository.save(staff);
     }
 
 
@@ -98,7 +99,7 @@ public class CoordinatorService {
 
     }
 
-    public void recalculateResearchProgress(Research research) {
+    private void recalculateResearchProgress(Research research) {
         double result;
         List<Event> events;
         int countCompletedTasks = 0;
@@ -116,7 +117,6 @@ public class CoordinatorService {
         result = countCompletedTasks / 341.0 * 100;
         research.setResearchProgress(result);
         researchRepository.save(research);
-
         //flush
     }
 

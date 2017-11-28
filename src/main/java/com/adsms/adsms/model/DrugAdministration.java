@@ -23,7 +23,7 @@ public class DrugAdministration {
     @Convert(converter = LocalDateConverter.class)
     private LocalDate drugAdministrationDate;
     @Column(name = "drug_administration_comment")
-    private String drugAdministration_comment;
+    private String drugAdministrationComment;
     @OneToOne
     @JoinColumn(name = "receipt_id")
     Receipt receipt;
